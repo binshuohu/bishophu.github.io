@@ -72,7 +72,7 @@ To recap, the whole process of this solution is merely a series of data transfor
 
 > array => transform to windows => sort each window => examine each window => the final result
 
-This solution isn't optimal in terms of space and time complexiy, but having break down the problem into several small part, we can optimize accodingly. The Functional way of solving problem is just the old 'divide and conquer' method, but without putting the programmer in the tar pit of nasty low level details. 
+This solution isn't optimal in terms of space and time complexity, but having break down the problem into several small part, we can optimize accodingly. The Functional way of solving problem is just the old 'divide and conquer' method, but without putting the programmer in the tar pit of nasty low level details. 
 
 [Contains Duplicate III]: https://leetcode.com/problems/contains-duplicate-iii/
 [LeetCode]: https://leetcode.com/
