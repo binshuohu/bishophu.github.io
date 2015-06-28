@@ -1,0 +1,21 @@
+# Site settings
+title: Fooly Functional Mumbler
+email: binshuo20@gmail.com
+description: > # this means to ignore newlines until next option 
+  Mumbling about programming, code and other stuff.
+
+timezone: Asia/Harbin
+
+defaults:
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+
+# Build settings
+markdown: kramdown
+
+kramdown:
+  input: GFM
