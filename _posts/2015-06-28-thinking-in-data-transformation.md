@@ -1,4 +1,5 @@
 ---
+comments: True
 ---
 
 A couple of days ago, I came across [this problem][Contains Duplicate III] on [LeetCode] [LeetCode]. Here's the description of it:
