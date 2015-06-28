@@ -38,17 +38,20 @@ def anyWindowContainsDuplicate(t: Int)(windows: List[Window]): Boolean = {
 }
 
 def minimumAdjacentGap(xs: Window): Int = xs match {
-  case hd::Nil => hd
+  case hd::Nil => 0
   case hd::tl => (tl, xs).zipped.map(_ - _).min
   case Nil => sys.error("can't happen")
 }
 {% endhighlight %}
 
+`minimumAdjacentGap` is the only function that contains logic for corner cases. The reason for special processing logic for single element Window is that if `k == 1`, then `i` and `j` in the original problem must be equal, thus the difference being `0`.
+
+
 OK, we got the first part done(or the last part, because we are taking a top-down approach), let's move on. How do we acquire a list of windows each of which is a sorted list itself from the original array given in the problem? Well, it's almost a no brainer in Scala. Just use the `List.sliding(size: Int)` method to get a list of sliding windows and sort the numbers in each.
 
 {% highlight scala %}
 def makeWindows(k: Int)(nums: List[Int]): List[Window] = {
-   nums.sliding(k).toList
+  nums.sliding(k).toList
 }
 
 def orderEachWindow(groups: List[Window]): List[Window] = groups map (_.sorted)
@@ -58,9 +61,9 @@ With all necessary parts ready to go, all that's left is to assemble them for go
 
 {% highlight scala %}
 def containDuplicate(nums: List[Int], k: Int, t: Int): Boolean = {
-    (anyWindowContainsDuplicate(t) _
-       compose orderEachWindow
-       compose makeWindows(k))(nums)
+  (anyWindowContainsDuplicate(t) _
+    compose orderEachWindow
+    compose makeWindows(k))(nums)
 }
 {% endhighlight %}
 
