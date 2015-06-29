@@ -21,19 +21,19 @@ Suppose we already have all the windows of size k on the array, all we need to d
 Let's define a function for that. I'm going to use Scala for all the code snippet we need to solve this problem. It's a concise and beautiful language I am currently learning and not as daunting as Haskell.
 A window on the array is still an array, right? So let's just define the window as an array. I mean, List, of course.
 
-{% highlight scala %}
+```scala
 type Window = List[Int]
-{% endhighlight %}
+```
 
 The Signature of the function that decide whether any window contains duplicate would be:
 
-{% highlight scala %}
+```scala
 def anyWindowContainsDuplicate(t: Int)(windows: List[Window]): Boolean = ???
-{% endhighlight %}
+```
 
 Now, the question comes down to how to find out duplicate. Hmm, it seems that if the numbers in the window are sorted, all we need to do is find the smallest differnece of any two consecutive numbers. Let's just assume numbers in any window are sorted. So the previous function's definition would be like this:
 
-{% highlight scala %}
+```scala
 def anyWindowContainsDuplicate(t: Int)(windows: List[Window]): Boolean = {
   windows exists (minimumAdjacentGap(_) <= t)
 }
@@ -43,29 +43,29 @@ def minimumAdjacentGap(xs: Window): Int = xs match {
   case hd::tl => (tl, xs).zipped.map(_ - _).min
   case Nil => sys.error("can't happen")
 }
-{% endhighlight %}
+```
 
 `minimumAdjacentGap` is the only function that contains logic for corner cases.  The reason for special processing logic for single element Window is that if the window size `k == 1`, then `i` and `j` in the original problem must be equal, thus the difference being `0`.  
 
 OK, we got the first part done(or the last part, because we are taking a top-down approach), let's move on. How do we acquire a list of windows each of which is a sorted list itself from the original array given in the problem? Well, it's almost a no brainer in Scala. Just use the `List.sliding(size: Int)` method to get a list of sliding windows and sort the numbers in each.
 
-{% highlight scala %}
+```scala
 def makeWindows(k: Int)(nums: List[Int]): List[Window] = {
   nums.sliding(k).toList
 }
 
 def orderEachWindow(groups: List[Window]): List[Window] = groups map (_.sorted)
-{% endhighlight %}
+```
 
 With all necessary parts ready to go, all that's left is to assemble them for good.
 
-{% highlight scala %}
+```scala
 def containsDuplicate(nums: List[Int], k: Int, t: Int): Boolean = {
   (makeWindows(k) _
     andThen orderEachWindow
     andThen anyWindowContainsDuplicate(t))(nums)
 }
-{% endhighlight %}
+```
 
 Alas, if the eta expasion could be elimanated and if scala provide the 'pipe' operator as F# and Elixir do, the code above would be more readable. But anyway, it's still clear enough to explain itself.
 
