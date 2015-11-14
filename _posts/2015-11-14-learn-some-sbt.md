@@ -22,33 +22,21 @@ OK, let's break this down and try to make sense of it. In the first line of the 
 
 Now type `sbt` in your console to enter the interactive REPL. Then type `inspect villain`, the output should be like this:
 
-> inspect villain
-
-> [info] Setting: java.lang.String = Sauron
-
-> [info] Description:
-
-> crooked mind
-
-> [info] Provided by:
-
-> {file:/Users/binshuo/repo/practice/}root/*:villain
-
-> [info] Defined at:
-
-> /Users/binshuo/repo/practice/build.sbt:7
-
-> [info] Delegates:
-
-> *:villain
-
-> {.}/*:villain
-
-> */*:villain
-
-> [info] Related:
-
-> {.}/compile:villain[info] [info] [info] [info] [info] [info] [info] 
+```
+[info] Setting: java.lang.String = Sauron
+[info] Description:
+[info]   crooked mind
+[info] Provided by:
+[info]   {file:/Users/binshuo/repo/practice/}root/*:villain
+[info] Defined at:
+[info]   /Users/binshuo/repo/practice/build.sbt:7
+[info] Delegates:
+[info]   *:villain
+[info]   {.}/*:villain
+[info]   */*:villain
+[info] Related:
+[info]   {.}/compile:villain
+```
 
 As you can see, the value to the key `villain` is `Sauron`. Why? Well, when you just give a bare key name without any axes specification, SBT will assume you use default axes. For `Project` axis, it's `current project`, for `Configuration` it's `Global`, and for `Task` it's `Gloabl` as well. The same applys when giving a key a value, just like we defined `villain` as `Sauron` above.
 
