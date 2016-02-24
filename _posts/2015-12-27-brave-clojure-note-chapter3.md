@@ -179,7 +179,6 @@ There are two kinds of sets, namely hash sets and sorted sets. Now we only talk 
 ```
 
 In Clojure, functions are eager, which means all parameters are evaluated before being passed to the function.
-
 How to define a function:
 
 ```clojure
